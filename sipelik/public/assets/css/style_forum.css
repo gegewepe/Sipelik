@@ -1,0 +1,347 @@
+html,
+body {
+	margin-bottom: 100px;
+ 	height: auto;
+ 	font-family: 'Open Sans', sans-serif;
+ 	z-index: 0;
+ 	background-color: white;
+}
+
+.input, .modal-content, .thunmbnail, .btn, .fileinput-preview{
+	border-radius: 0;
+}
+
+body.modal-open{
+	overflow: hidden;
+}
+
+.container{
+	margin: 0px  50px 160px 50px;
+	padding: 0;
+	width: auto;
+}
+
+.modal{
+	text-align: center;
+}
+
+.modal-header{
+  background-color: #3A3E3E;
+  color: white;
+}
+
+.modal-text-header{
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.modal-header button{
+  color: red;
+}
+
+.close:hover{
+  color: red;
+}
+
+.navbar{
+	padding-top: 100px;
+	border: 0px;
+	background-color: #3A3E3E;
+	border-radius: 0;
+	padding-bottom: -1px;
+}
+
+.navbar-default .navbar-nav > .active > a{
+	background-color: white;
+}
+
+.navbar-default .navbar-nav > li{
+	margin-left: 3px;
+}
+
+.navbar-default .navbar-nav > li > a, .navbar .navbar-header a{
+	background-color: #739240;
+	color: white;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	height: 30px;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar .navbar-header a:hover{
+	background-color: white;
+	color: #3A3E3E;
+}
+
+.navbar-default .navbar-nav  li > a:link, .navbar .navbar-header a:link{
+	background-color: #739240;
+}
+
+.navbar .navbar-header{
+	margin-left: 50px;
+}
+
+.navbar-default .navbar-nav > li > #kanan{
+	margin-right: 50px;
+}
+
+.pad-section { padding: 50px 0; }
+
+.pad-section img { width: 100%; }
+
+/*thread di sini*/
+.thread-category{
+	margin: 0;
+	padding: 5px 0px 5px 5px;
+	color: white;
+	font-size: 1.2em;
+	font-weight: 500;
+	background: #3A3E3E none repeat scroll 0% 0%;
+}
+
+#group1 .container{
+	margin-bottom: 30px;
+}
+
+.thread-subthreadlist{
+	background-color: #EDF3E2;
+	padding: 10px;
+}
+
+.thread-subthread{
+	background-color: white;
+	border-bottom: 1px solid #e1e1e1;
+}
+
+.subthread-icon{
+	font-size: 30px;
+	color: #9C9E9E;
+	margin: 0;
+	display: block;
+	margin-left: 15px;
+}
+
+.subthread-judul a{
+	font-size: 1.3em;
+	text-decoration: none;
+	color: black;
+}
+
+.subthread-isi{
+	margin-left: -15px;
+}
+
+#judul-sub{
+	margin-bottom: 0;
+}
+
+.category-header{
+	background-color: #3A3E3E;
+	padding: 10px;
+	color: white
+}
+
+.category-header a{
+	text-decoration: none;
+	color: #ddd;
+	padding-left: 15px;
+}
+
+.category-header a:hover{
+	color: white;
+}
+
+.pad-left{padding-left: 15px;}
+.pad-bottom{padding-bottom: 15px;}
+.pad-right{padding-right:15px;}
+.pad-top{padding-top: 15px;}
+
+.gambarTS{
+	height: 70px;
+	width: 70px;
+	border: 1px solid lightgrey;
+	/*margin-right: 20px;*/
+}
+
+.judul_thread{
+	font-size: 2em;
+	font-weight: 500;
+}
+
+.timestamp{
+	font-size: 1em;
+	color: #999966;
+
+}
+
+.replysum{
+	margin-top: 20px;
+	padding: 10px;
+	color: white;
+	background-color: #3A3E3E;
+	font-weight: 5j00;
+	margin-left: 20px;
+}
+
+/*komen di sini*/
+
+.comment-wrapper, .profile-wrapper{
+	padding: 10px;
+	background-color: #F0f0f0;
+	margin-left: 20px;
+	padding-bottom: 20px;
+}
+
+.comment{
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.c_head{
+	padding: 10px;
+	background-color: #C0C0C0;
+}
+
+.c_body{
+	background-color: white;
+}
+
+.c_profile, .c_comment{
+	margin-top: 10px;
+	margin-bottom: 40px;
+}
+
+.c_foto{
+	height: 100px;
+	width: 100px;
+	border: 1px solid lightgrey;
+	margin-left: 20%;
+}
+
+.c_foto .gambarTS{
+	height: 100px;
+	width: 100px;
+	
+}
+
+.c_comment_content, .profile_body{
+	margin-right: 30px;
+}
+
+.c_input{
+	margin-top: 50px;
+	background-color: #f0f0f0;
+}
+
+#c_input_form{
+	visibility: hidden;
+	display: none;
+	font-family: 'Open Sans', sans-serif;
+}
+
+/*profile di sini*/
+.p-menu{
+	transition: color 0.5s,
+				background-color 0.5s;
+}
+
+.profile-wrapper{
+	padding-right: 30px;
+}
+
+.profile-wrapper .gambarTS{
+	margin-left: 30%;
+}
+
+.profile-body{
+	padding: 20px 10px;
+	background-color: white;
+}
+
+.profile-nama{
+	font-size: 1.5em;
+}
+
+.profile-status{
+	background-color: #3A3E3E;
+	color: white;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding: 10px;
+}
+
+.p-status-head{
+	font-weight: 600;
+	margin-bottom: 5px;
+}
+
+.p-status-column{
+	margin-bottom: 5px;	
+}
+
+.list-group{
+	margin-top: 10px;
+	margin-right: 0px;
+}
+
+.list-group-item{
+	border: 0px;
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{
+	background-color: #739240;
+	color: white;
+}
+
+.list-group-item:first-child, .list-group-item:last-child{
+	border-radius: 0px;
+}
+
+.a_thread{
+	color: black;
+	text-decoration: none;
+}
+
+.a_thread:hover{
+	font-weight: 600;
+	color: black;
+	text-decoration: none;
+}
+
+.list_thread{
+	background-color: transparent;
+	border-bottom: 1px solid lightgrey;
+}
+
+#loading{
+	position: absolute;
+	left: 50%;
+	z-index: 10;
+	padding-top: 10px;
+	display: none;
+}
+
+/*footer di sini*/
+.footerku{
+	margin: 0 20px;
+	position: fixed;
+	bottom: 50px;
+	z-index: -2;
+	height: 50px;
+	width: 100%
+}
+
+/*posting*/
+.post-thread{
+  padding: 10px;
+}
+
+.username{
+	color: #505050;
+	text-decoration: none;
+}
+
+.username:hover{
+	color: black;
+	font-weight: 600;
+	text-decoration: none;
+}
