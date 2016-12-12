@@ -16,6 +16,8 @@
 							<div class="form-group">
 								<input class="form-control" placeholder="Password" name="password" type="password" value="" required>
 							</div>
+							<input name="remember-me" type="checkbox" value="true">Remember Me
+							
 							{{csrf_field()}}
 						 <button class="btn btn-primary btn btn-block">Masuk</button>
 						</fieldset>

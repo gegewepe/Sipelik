@@ -43,8 +43,9 @@ class UserController extends controller{
       }
       elseif(!$userexist && $data['password']==$data['conpassword'])
   		{
+
           	$pass=bcrypt( $data['password']);
-          	Profile::insertGetId(array(
+          	User::insertGetId(array(
              	 'username'=> $data['username'],
              	 'password'=> $pass,
              	 'nama_user'=> $data['nama'],
@@ -54,6 +55,10 @@ class UserController extends controller{
              	 'email'=> $data['email']
             	 
              	 ));
+            $array = ['username'=>$data['username'], 'password'=>$data['password']];
+            if(Auth::attempt($array,false)){
+                $id=Auth::user()->id;
+            }
            	return redirect('/');
       }
       else
@@ -84,11 +89,17 @@ class UserController extends controller{
   {
     if(Request::isMethod('post'))
     {
+      
+      $rememberMe = false;
+      if(isset($_POST['remember-me'])){
+        $rememberMe = true;
+      }
+     
       $new = Input::only('username','password');
-  
-      if (Auth::attempt($new,true))
+      print_r($new);
+  /*
+      if (Auth::attempt($new,$rememberMe))
       {
-
         $id=Auth::user()->id;
         return redirect('/');
       }
@@ -97,6 +108,7 @@ class UserController extends controller{
         Session::flash('message','Login anda gagal, silahkan cek kembali username dan password');
         return redirect('masuk');
       }
+    */  
     }
     elseif(Request::isMethod('get'))
     {
