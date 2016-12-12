@@ -1,0 +1,17 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Notification extends Model
+{
+	public $table = "notification";
+    protected $fillable = array(
+		'id_notification',
+		'id_user',
+		'message',
+		'flag',
+		'created_at'
+    );
+}

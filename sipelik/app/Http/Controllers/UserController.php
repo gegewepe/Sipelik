@@ -96,8 +96,7 @@ class UserController extends controller{
       }
      
       $new = Input::only('username','password');
-      print_r($new);
-  /*
+    
       if (Auth::attempt($new,$rememberMe))
       {
         $id=Auth::user()->id;
@@ -108,7 +107,7 @@ class UserController extends controller{
         Session::flash('message','Login anda gagal, silahkan cek kembali username dan password');
         return redirect('masuk');
       }
-    */  
+      
     }
     elseif(Request::isMethod('get'))
     {
@@ -131,6 +130,19 @@ class UserController extends controller{
     if(Auth::check())
     {
       return view('editakun');
+    }
+    else
+    {
+      return redirect('/');
+    }
+  }
+
+  public function showNotif(){
+    if(Auth::check())
+    {
+      DB::table('notification')->where('flag',0)->where('id_user',Auth::id())->update(['flag'=>1]);
+      $notifList = DB::table('notification')->where('id_user',Auth::id())->orderBy('created_at','desc')->get();
+      return view('notif',['notifList' => $notifList]);
     }
     else
     {

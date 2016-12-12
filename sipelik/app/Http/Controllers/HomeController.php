@@ -91,6 +91,8 @@ class HomeController extends controller{
     return view('lihatbarang',$data);
   }
 
+  
+
 }
 
 ?>

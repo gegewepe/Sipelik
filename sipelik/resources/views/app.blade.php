@@ -55,7 +55,16 @@
 				<ul class="nav navbar-nav navbar-right">
 
 					@if(Auth::check())
-					
+						
+
+						<?php 
+							$totalNotifUnread = DB::table('notification')->where('flag',0)->where('id_user',Auth::id())->count();
+						?>
+						@if($totalNotifUnread > 0)
+							<li><h1><a href="{{URL::to('notification')}}" class="button" style="color:red" >{{$totalNotifUnread}} Notification</a></h1></li>
+						@else
+							<li><a href="{{URL::to('notification')}}" class="button">0 Notification</a></li>
+						@endif
 					<li><a href="{{URL::to('tambahbarang')}}" class="button">Buat Iklan</a></li>
 					<li><a href="{{URL::to('lihatbarang')}}" class="button">Lihat Iklan Anda</a></li>
 					<li class="dropdown">

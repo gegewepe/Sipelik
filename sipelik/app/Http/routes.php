@@ -33,6 +33,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('lihatbarang','HomeController@lihatbarang');
     Route::get('iklan_detail/{id}','HomeController@ShowDetailIklan');
 
+    Route::get('notification','UserController@showNotif');
     Route::get('register','UserController@ShowRegisterForm');
     Route::post('daftar','UserController@daftar');
     Route::get('daftar','UserController@daftar');
