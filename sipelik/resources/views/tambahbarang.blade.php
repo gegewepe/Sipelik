@@ -11,7 +11,7 @@
 								<input class="form-control" placeholder="Judul" name="judul" type="text" autofocus="" required>
 							</div>
 							<div class="form-group">
-								<input class="form-control" placeholder="Harga(/kg)" name="harga" type="text" value="" required>
+								<input class="form-control" placeholder="Harga Total" name="harga" type="number" value="" required>
 							</div>
 							<div class="form-group">
 								<input class="form-control" placeholder="Deskripsi" name="deskripsi" type="text" value="" required>
@@ -19,6 +19,10 @@
 							<div class="form-group">
 								<input class="form-control" placeholder="Stok(kg)" name="stok" type="text" value="" required>
 							</div>
+							<div class="form-group">
+								<input class="form-control" placeholder="durasi pelelangan (jam)" name="jam" type="number" value="" required>
+							</div>
+
 							<div class="form-group">
 								<input class="form-control" name="idpenjual" type="hidden" value="{{Auth::user()->id}}">
 							</div>

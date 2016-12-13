@@ -10,7 +10,6 @@ class Transaksilelang extends Model
     protected $fillable = array(
 		'id_iklan',
 		'id_user',
-		'harga',
-		'waktu'
+		'harga'
     );
 }

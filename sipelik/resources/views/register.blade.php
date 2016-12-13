@@ -23,7 +23,7 @@
 								<input class="form-control" placeholder="Nama" name="nama" type="text" value="" required>
 							</div>
 							<div class="form-group">
-								<input class="form-control" placeholder="Nomor Telepon atau HP" name="telp" type="text" value="" required>
+								<input class="form-control" placeholder="Nomor Telepon atau HP" name="telp" type="number" value="" required>
 							</div>
 							<div class="form-group">
 								<input class="form-control" placeholder="Alamat Asal" name="asal" type="text" value="" required>

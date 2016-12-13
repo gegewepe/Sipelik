@@ -30,7 +30,6 @@ class HomeController extends controller{
   public function ShowDetailIklan($id)
   {
     $sellingIklan=DB::table('iklan')->select('iklan.id_iklan')->where('iklan.id_iklan','=',$id)->where('iklan.status','=',1)->get();
-    $bookedIklan=DB::table('iklan')->select('iklan.id_iklan')->where('iklan.id_iklan','=',$id)->where('iklan.status','=',0)->get();
     $soldIklan=DB::table('iklan')->select('iklan.id_iklan')->where('iklan.id_iklan','=',$id)->where('iklan.status','=',2)->get();
     if(!Auth::check())
     {
@@ -80,27 +79,7 @@ class HomeController extends controller{
     }
   }
 
-  public function updateharga(){
-    $data=Input::all();
-    $datas=DB::table('transaksilelang')->where('id_iklan','=',$data['idiklan'])->get();
-    if($data['hargabaru'] > $datas[0]->harga)
-      {
-        DB::table('transaksilelang')
-            ->where('id_iklan', $data['idiklan'])
-            ->update(['harga' => $data['hargabaru'],'id_user' => $data['idakun']]);
-        Session::flash('message','Berhasil melelang');
-
-        DB::table('Iklan')
-            ->where('id_iklan', $data['idiklan'])
-            ->update(['harga' => $data['hargabaru']]);
-        Session::flash('message','Berhasil melelang');
-        return redirect('/');
-      }
-    else{
-      Session::flash('message','Harga lebih kecil daripada yang terbaru');
-      return redirect('/');
-    }
-  }
+  
   public function search()
   {
     $datas=Input::all();

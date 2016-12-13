@@ -13,60 +13,14 @@ use App\User;
 use App\Iklan;
 use App\Testimoni;
 use App\Transaksi;
+use App\transaksilelang;
 use Request;
 
 
 
 class BuyerController extends controller{
 
-  public function ShowTestimoniForm($id)
-  {
-    if(Auth::check())
-    {
-      $pembeli=DB::table('transaksi')->select('id_transaksi')->where('transaksi.idiklan','=',$id)->where('transaksi.idpembeli','=',Auth::user()->id)->get();
-      $ada=DB::table('testimoni')->select('testimoni.id_iklan')->where('testimoni.id_iklan','=',$id)->get();
-      if($pembeli && !$ada)
-      {
-        Session::flash('message','Anda hanya bisa melakukan testimoni sebanyak 1 kali');
-        return view("testimoni",compact('id'));
-      }
-      elseif($ada)
-      {
-        Session::flash('message','Anda sudah melakukan testimoni sebelumnya');
-        return redirect()->back();
-      }
-      else
-      {
-        return redirect('/');
-      }
-    }
-    else
-    {
-      return redirect('/');
-    }
-  }
-
-  public function AddTestimoni(){
-    if(Request::isMethod('post'))
-    {
-      $data=Input::all();
-      Testimoni::insertGetId(array(
-          'isi'=> $data['testimoni'],
-          'score'=> $data['score'],
-          'id_user'=> $data['iduser'],
-          'id_iklan'=> $data['idiklan']));
-      $id = $data['idiklan'];
-      $dataa=array();
-      $dataa['iklan']=DB::table('iklan')->join('profileuser','iklan.idpenjual','=','profileuser.id')->select('iklan.*','profileuser.nama_user','profileuser.alamat_kirim')->where('iklan.id_iklan','=',$id)->get();
-      Session::flash('message','Terima kasih atas testimoni anda');
-      return view('detailIklan',$dataa);
-    }
-    elseif(Request::isMethod('get'))
-    {
-      return redirect('/');
-    }
-  }
-
+  
   public function ShowPenjual($id){
     if(Auth::check())
     {
@@ -102,32 +56,49 @@ class BuyerController extends controller{
     {
       $data=Input::all();
       $id = $data['idiklan'];
-      $url = $data['url'];
 
-      $status = DB::table('iklan')->select('iklan.id_iklan')->where('id_iklan','=',$id)->where('iklan.status','=',1)->get();
+      $datas=DB::table('iklan')->where('id_iklan','=',$id)->first();
+      if($data['hargabaru'] > $datas->harga)
+        {
+          $jam = $datas->sisa_jam;
+          $menit = $datas->sisa_menit;
+          if($jam==0 && $menit < 10){
+              DB::table('iklan')
+                  ->where('id_iklan', $id)
+                  ->update(['sisa_menit' => 10]);
+          }
 
-      if($status)
-      {
-         DB::table('iklan')
-                ->where('id_iklan', $id)
-                ->update(['status' => 0]);
 
-        Transaksi::insertGetId(array(
-        'tanggal_terjual'=> $data['tanggal'],
-        'idpembeli'=> $data['idpembeli'],
-        'idpenjual'=> $data['idpenjual'],
-        'idiklan'=> $data['idiklan']));
+          $previousBuyer = $datas->id_buyer;
+          if($previousBuyer !=null && $previousBuyer != ""){
+              $message = "Anda gagal membeli " . $datas->judul_iklan . " karena ada yang menaruh uang lebih banyak";
+              DB::table('notification')->insert([
+                ['id_user' => $previousBuyer, 'message' => $message]]);
+              
+          }
+          $message = "Anda mencoba membeli " . $datas->judul_iklan;
+          DB::table('notification')->insert([
+                ['id_user' => Auth::id(), 
+                'message' => $message]]);
+
+
+          DB::table('iklan')
+                  ->where('id_iklan', $id)
+                  ->update(['harga' => $data['hargabaru'], 'id_buyer' => Auth::id()]);
+
+          Session::flash('message','Berhasil melelang');
+          return redirect('/');
+        }
+      else{
+        Session::flash('message','Harga lebih kecil daripada yang terbaru');
+        return redirect('/');
+      }
 
         Session::flash('message','Pembelian selesai. Klik data penjual untuk melihat informasi penjual. Silahkan isi testimoni setelah penjual mengkonfirmasi pemebelian anda');
         return Redirect::to($url);
-      }
-      else
-      {
-        Session::flash('message','Barang sudah dibeli pembeli lain');
-        return redirect('/');
-      }
+      
     }
-    elseif(Request::isMethod('get'))
+    else if(Request::isMethod('get'))
     {
     return redirect('/');
     }

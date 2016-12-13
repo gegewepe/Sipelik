@@ -10,12 +10,16 @@ class Iklan extends Model
     protected $fillable = array(
 	'id_iklan',
 	'judul_iklan',
-	'harga_iklan',
+	'harga',
 	'deskripisi_iklan',
 	'gambar',
 	'stok',
 	'idpenjual',
-	'status'
-	
+	'status',
+	'sisa_jam',
+	'sisa_menit',
+	'id_buyer',
+	'created_at',
+	'updated_at'
     	);
 }

@@ -101,6 +101,10 @@ $url = Request::path();
               <td>{{$post->nama_user}}</td>
             </tr>
             <tr>
+              <td>Durasi lelang</td>
+              <td>{{$post->sisa_jam}} jam {{$post->sisa_menit}} menit</td>
+            </tr>
+            <tr>
               <td>Lokasi</td>
               <td>{{$post->alamat_kirim}}</td>
             </tr>
@@ -139,7 +143,7 @@ $url = Request::path();
                 </div>
               @endif
               @if($post->status==1)
-             <form class="form col-md-12 center-block" action="{{URL::to('updateharga')}}" method="POST" >
+             <form class="form col-md-12 center-block" action="{{URL::to('transaksi')}}" method="POST" >
                 <fieldset>
                 <div class="form-group">
                 <input class="form-control" name="idakun" type="hidden" value="{{Auth::user()->id}}">

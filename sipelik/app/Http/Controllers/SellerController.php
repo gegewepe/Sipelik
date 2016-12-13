@@ -68,6 +68,7 @@ class SellerController extends controller{
       'deskripsi_iklan'=> $data['deskripsi'],
       'stok'=> $data['stok'],
       'gambar'=>$filepath,
+      'sisa_jam' => $data['jam'],
       'idpenjual'=> $data['idpenjual']));
       
       $datas=DB::table('Iklan')->where('harga','=',$data['harga'])->where('stok','=',$data['stok'])->where('deskripsi_iklan','=',$data['deskripsi'])->get();
