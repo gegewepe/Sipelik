@@ -13,7 +13,9 @@ use App\User;
 use App\Iklan;
 use App\Testimoni;
 use App\Transaksi;
+use App\transaksilelang;
 use Request;
+use Carbon\Carbon;
 
 
 
@@ -53,6 +55,10 @@ class SellerController extends controller{
               // MOVE THE UPLOADED FILES TO THE DESTINATION DIRECTORY
               $upload_success = $file->move($destinationPath, $fileName);
               $filepath = $destinationPath . '/' . $nama;
+      $data=Input::all();
+      
+      $now = Carbon::now()->addHours(6)->toDateTimeString();
+
       Iklan::insertGetId(array(
       'judul_iklan'=> $data['judul'],
       'harga'=> $data['harga'],
@@ -60,6 +66,14 @@ class SellerController extends controller{
       'stok'=> $data['stok'],
       'gambar'=>$filepath,
       'idpenjual'=> $data['idpenjual']));
+      
+      $datas=DB::table('Iklan')->where('harga','=',$data['harga'])->where('stok','=',$data['stok'])->where('deskripsi_iklan','=',$data['deskripsi'])->get();
+      
+      transaksilelang::insertGetId(array(
+          'id_iklan'=> $datas[0]->id_iklan,
+          'id_user'=> 0,
+          'harga'=> $data['harga'],
+          'waktu'=> $now));
       
       Session::flash('message','Iklan berhasil dibuat');
       return redirect('/');
