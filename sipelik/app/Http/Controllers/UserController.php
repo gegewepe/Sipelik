@@ -19,6 +19,12 @@ use Request;
 
 class UserController extends controller{
 
+  public function getTotalNotif(){
+    if(Auth::check())
+        return DB::table('notification')->where('flag',0)->where('id_user',Auth::id())->count();
+    return 0;
+  }
+
   public function ShowRegisterForm(){
     if(!Auth::check())
     {

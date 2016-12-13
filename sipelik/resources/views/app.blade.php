@@ -13,6 +13,8 @@
 	<script src="{{URL::to ('assets/plugin/datatables/js/jquery.dataTables.js')}}"></script>
 	<script src="{{URL::to ('assets/plugin/datatables/js/dataTables.bootstrap.js')}}"></script>
 	<script src="{{URL::to ('assets/js/bootstrap.min.js')}}"></script>
+	<script src="{{URL::to ('assets/js/jquery-1.11.2.min.js')}}"></script>
+	<script src="{{URL::to ('assets/js/jquery.min.js')}}"></script>
 	<script src="{{URL::to ('assets/plugin/TT/js/dataTables.tableTools.js')}}"></script>
 	<link href="{{URL::to ('assets/plugin/TT/css/dataTables.tableTools.css')}}" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{{URL::to ('assets/css/half-slider.css')}}">
@@ -22,6 +24,18 @@
 			background: url('assets/img/background2.jpg');
 		}
 	</style>
+	<script>
+		function updateNotif() {
+			$.ajax({url: "{{URL::to ('notif/total')}}", success: function(result){
+	           	if(result > 0){
+	           		$("#notif").html('<h1><a href="{{URL::to('notification')}}" class="button" style="color:red" > ' + result +' Notifikasi</a></h1>');
+	           	}
+	           	setInterval(updateNotif, 30000);
+	        }});
+		}
+
+		updateNotif();
+	</script>
 </head>
 
 
@@ -55,16 +69,17 @@
 				<ul class="nav navbar-nav navbar-right">
 
 					@if(Auth::check())
-						
-
+					
 						<?php 
 							$totalNotifUnread = DB::table('notification')->where('flag',0)->where('id_user',Auth::id())->count();
 						?>
 						@if($totalNotifUnread > 0)
-							<li><h1><a href="{{URL::to('notification')}}" class="button" style="color:red" >{{$totalNotifUnread}} Notification</a></h1></li>
+							<li id="notif"><h1><a href="{{URL::to('notification')}}" class="button" style="color:red" >{{$totalNotifUnread}} Notifikasi</a></h1></li>
 						@else
-							<li><a href="{{URL::to('notification')}}" class="button">0 Notification</a></li>
+							<li id="notif"><a href="{{URL::to('notification')}}" class="button">0 Notifikasi</a></li>
 						@endif
+					
+
 					<li><a href="{{URL::to('tambahbarang')}}" class="button">Buat Iklan</a></li>
 					<li><a href="{{URL::to('lihatbarang')}}" class="button">Lihat Iklan Anda</a></li>
 					<li class="dropdown">
@@ -110,7 +125,7 @@
 				<b>SIPELIK</b> Situs Pelelangan Ikan Online
 			</div>
 			<div class="col-md-4" style="text-align:center;">
-				<b>Temukan kami di </b><img src="{{URL::to ('assets/icons/facebookicon.png')}}" height="50" width="50">
+				<b id="haha">Temukan kami di </b><img src="{{URL::to ('assets/icons/facebookicon.png')}}" height="50" width="50">
 				<img src="{{URL::to ('assets/icons/twittericon.png')}}" height="50" width="50">
 				<img src="{{URL::to ('assets/icons/youtubeicon.png')}}" height="50" width="50">
 				<img src="{{URL::to ('assets/icons/instagramicon.png')}}" height="50" width="50">
