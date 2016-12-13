@@ -13,7 +13,9 @@ use App\User;
 use App\Iklan;
 use App\Testimoni;
 use App\Transaksi;
+use App\transaksilelang;
 use Request;
+use Carbon\Carbon;
 
 
 
@@ -77,6 +79,27 @@ class HomeController extends controller{
     }
   }
 
+  public function updateharga(){
+    $data=Input::all();
+    $datas=DB::table('transaksilelang')->where('id_iklan','=',$data['idiklan'])->get();
+    if($data['hargabaru'] > $datas[0]->harga)
+      {
+        transaksilelang::insertGetId(array(
+          'id_iklan'=> $data['idiklan'],
+          'id_user'=> $data['idakun'],
+          'harga'=> $data['hargabaru'],
+          'waktu'=> $datas[0]->waktu));
+        DB::table('Iklan')
+            ->where('id_iklan', $data['idiklan'])
+            ->update(['harga' => $data['hargabaru']]);
+        Session::flash('message','Berhasil melelang');
+        return redirect('/');
+      }
+    else{
+      Session::flash('message','Harga lebih kecil daripada yang terbaru');
+      return redirect('/');
+    }
+  }
   public function search()
   {
     $datas=Input::all();

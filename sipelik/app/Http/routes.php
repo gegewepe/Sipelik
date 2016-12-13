@@ -32,6 +32,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('search','HomeController@search');
     Route::get('lihatbarang','HomeController@lihatbarang');
     Route::get('iklan_detail/{id}','HomeController@ShowDetailIklan');
+    Route::post('updateharga','HomeController@updateharga');
+    Route::get('updateharga','HomeController@updateharga');
 
     Route::get('notification','UserController@showNotif');
     Route::get('register','UserController@ShowRegisterForm');

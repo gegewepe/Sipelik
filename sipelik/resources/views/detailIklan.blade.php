@@ -139,9 +139,27 @@ $url = Request::path();
                 </div>
               @endif
               @if($post->status==1)
-                  <div class="col-md-6">
-                    <button type="button" class="btn btn-info btn-md" align="right" data-toggle="modal" data-target="#myModal">Beli</button>
+             <form class="form col-md-12 center-block" action="{{URL::to('updateharga')}}" method="POST" >
+                <fieldset>
+                <div class="form-group">
+                <input class="form-control" name="idakun" type="hidden" value="{{Auth::user()->id}}">
+              </div>
+                <div class="form-group">
+                <input class="form-control" name="idiklan" type="hidden" value="{{$post->id_iklan}}">
+                </div>
+                <div class="form-group">
+                <input class="form-control" name="hargalama" type="hidden" value="{{$post->harga}}">
+                </div>
+                <div class="form-group">
+                  <input class="form-control" name="idpenjual" type="hidden" value="{{$post->idpenjual}}">
+                </div>
+                  <div class="form-group">
+                    <input class="form-control" placeholder="harga Baru" name="hargabaru" type="text" autofocus="" required>
                   </div>
+              {{csrf_field()}}
+             <button class="btn btn-primary btn btn-block">Lelang</button>
+            </fieldset>
+          </form>
               @endif
             @endif
           @endforeach
