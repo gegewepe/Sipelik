@@ -154,7 +154,7 @@ $url = Request::path();
                   <input class="form-control" name="idpenjual" type="hidden" value="{{$post->idpenjual}}">
                 </div>
                   <div class="form-group">
-                    <input class="form-control" placeholder="harga Baru" name="hargabaru" type="text" autofocus="" required>
+                    <input class="form-control" placeholder="Harga lelang" name="hargabaru" type="text" autofocus="" required>
                   </div>
               {{csrf_field()}}
              <button class="btn btn-primary btn btn-block">Lelang</button>

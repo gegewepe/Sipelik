@@ -51,6 +51,7 @@ class HomeController extends controller{
     }
     elseif(Auth::check())
     {
+
       if($sellingIklan)
       {
         $data=array();
@@ -84,11 +85,11 @@ class HomeController extends controller{
     $datas=DB::table('transaksilelang')->where('id_iklan','=',$data['idiklan'])->get();
     if($data['hargabaru'] > $datas[0]->harga)
       {
-        transaksilelang::insertGetId(array(
-          'id_iklan'=> $data['idiklan'],
-          'id_user'=> $data['idakun'],
-          'harga'=> $data['hargabaru'],
-          'waktu'=> $datas[0]->waktu));
+        DB::table('transaksilelang')
+            ->where('id_iklan', $data['idiklan'])
+            ->update(['harga' => $data['hargabaru'],'id_user' => $data['idakun']]);
+        Session::flash('message','Berhasil melelang');
+
         DB::table('Iklan')
             ->where('id_iklan', $data['idiklan'])
             ->update(['harga' => $data['hargabaru']]);

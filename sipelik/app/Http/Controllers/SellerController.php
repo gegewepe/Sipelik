@@ -58,6 +58,9 @@ class SellerController extends controller{
       $data=Input::all();
       
       $now = Carbon::now()->addHours(6)->toDateTimeString();
+      $jam = substr($now, 11,2);
+      $min = substr($now, 14,2);
+      
 
       Iklan::insertGetId(array(
       'judul_iklan'=> $data['judul'],
@@ -73,7 +76,10 @@ class SellerController extends controller{
           'id_iklan'=> $datas[0]->id_iklan,
           'id_user'=> 0,
           'harga'=> $data['harga'],
-          'waktu'=> $now));
+          'waktu'=> $now,
+          'jam'=>$jam,
+          'menit'=>$min)
+      );
       
       Session::flash('message','Iklan berhasil dibuat');
       return redirect('/');
