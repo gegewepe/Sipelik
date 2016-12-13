@@ -28,6 +28,7 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
+
     Route::get('/','HomeController@ShowIklan');
     Route::get('search','HomeController@search');
     Route::get('lihatbarang','HomeController@lihatbarang');
@@ -35,6 +36,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('updateharga','HomeController@updateharga');
     Route::get('updateharga','HomeController@updateharga');
 
+    Route::get('notif/total','UserController@getTotalNotif');
     Route::get('notification','UserController@showNotif');
     Route::get('register','UserController@ShowRegisterForm');
     Route::post('daftar','UserController@daftar');
